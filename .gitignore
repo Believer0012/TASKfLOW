@@ -23,3 +23,30 @@ Thumbs.db
 # Docker
 *.pid
 docker-compose.override.yml
+
+# Node
+node_modules/
+**/node_modules/
+
+# Environment
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build / output
+dist/
+build/
+coverage/
+
+# IDEs
+.idea/
+
+# Misc
+.cache/
+*.pid
+.DS_Store
+Thumbs.db
