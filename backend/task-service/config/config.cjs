@@ -2,7 +2,7 @@ module.exports = {
   development: {
     username: 'root',
     password: '2000',
-    database: 'taskFlow_user',
+    database: 'taskFlow_task',
     host: '127.0.0.1',
     port: 3306,
     dialect: 'mysql'
@@ -10,7 +10,7 @@ module.exports = {
   test: {
     username: 'root',
     password: '2000',
-    database: 'taskFlow_user',
+    database: 'taskFlow_task',
     host: '127.0.0.1',
     port: 3306,
     dialect: 'mysql'
@@ -18,7 +18,7 @@ module.exports = {
   production: {
     username: 'root',
     password: '2000',
-    database: 'taskFlow_user',
+    database: 'taskFlow_task',
     host: '127.0.0.1',
     port: 3306,
     dialect: 'mysql'

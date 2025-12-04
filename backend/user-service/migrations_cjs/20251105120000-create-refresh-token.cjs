@@ -1,27 +1,33 @@
- 'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('RefreshTokens', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      username: {
-        type: Sequelize.STRING(50),
+      token: {
+        type: Sequelize.STRING(512),
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING(100),
+      userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
+        references: { model: 'Users', key: 'id' },
+        onDelete: 'CASCADE',
       },
-      password_hash: {
-        type: Sequelize.STRING(255),
+      expiresAt: {
+        type: Sequelize.DATE,
         allowNull: false,
+      },
+      revoked: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -37,6 +43,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('RefreshTokens');
   },
 };

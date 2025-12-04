@@ -6,16 +6,18 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Support both DB_USER and DB_USERNAME environment variable names
+const dbUser = process.env.DB_USER || process.env.DB_USERNAME;
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
+    process.env.DB_NAME || process.env.DB_NAME,
+    dbUser,
     process.env.DB_PASSWORD,
     {
         host: process.env.DB_HOST,
         dialect: process.env.DB_DIALECT || "mysql",
-         logging: false,
+        logging: false,
     }
-)
+);
 
 
 
