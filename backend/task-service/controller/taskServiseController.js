@@ -1,4 +1,5 @@
 import Task from "../model/base/task.js";
+import jwt from "jsonwebtoken";
 
 // Create new task
 export const createTask = async (req, res) => {
@@ -21,17 +22,24 @@ export const createTask = async (req, res) => {
   }
 };
 
-// Get all tasks for a user
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.findAll({ where: { userId: req.user.id } });
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({ message: "Missing token" });
+
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "change-me");
+    const userId = decoded.id;
+
+    console.log("Fetching tasks for user:", userId);
+    const tasks = await Task.findAll({ where: { userId } });
+
     res.json(tasks);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error fetching tasks" });
   }
 };
-
 // Update a task
 export const updateTask = async (req, res) => {
   try {

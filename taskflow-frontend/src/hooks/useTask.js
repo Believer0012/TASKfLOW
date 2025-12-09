@@ -42,7 +42,6 @@ export default function useTasks() {
     latestQueryRef.current = { search, status };
   }, []);
 
-  // derive visible tasks (memoized)
   const visibleTasks = useMemo(() => {
     const { search, status } = latestQueryRef.current;
     return tasks.filter(t => {
@@ -55,7 +54,7 @@ export default function useTasks() {
   return {
     loading, err,
     tasks: visibleTasks,
-    rawTasks: tasks, // sometimes handy
+    rawTasks: tasks,
     fetchTasks, createTask, updateTask, deleteTask,
     setFilters,
   };
